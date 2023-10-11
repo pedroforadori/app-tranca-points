@@ -9,6 +9,8 @@ interface IPlayer {
     points: number
     handle10Points(): any
     handle10PointsMinus(): any
+    handle50Points(): any
+    handle50PointsMinus(): any
     handle100Points(): any
     handle100PointsMinus(): any
     handle500Points(): any
@@ -31,43 +33,48 @@ export default function Player(props: IPlayer){
         <View style={styles.player}>
           <Text style={styles.text}>{props.name}</Text>
           <Text style={[styles.text, styles.textPoints]}>{props.points}</Text>
-          <View style={styles.edit}>
+          {/* <View style={styles.edit}>
             <Pressable onPress={() => setViewAction(viewAction === false ? true : false)}>
                 <MaterialCommunityIcons name="file-edit-outline" size={24} color="white" />
             </Pressable>
             <Pressable onPress={() => handleAddHistory(props.points)} style={styles.edit}>
                 <MaterialCommunityIcons name="plus-outline" size={24} color="white" />
             </Pressable>
+          </View> */}
+
+          <View style={styles.action}>
+              <Pressable onPress={props.handle10Points} style={styles.plus}>
+                  <Text style={styles.textPlus}>+ 10</Text>
+              </Pressable>
+              <Pressable onPress={props.handle10PointsMinus} style={styles.minus}>
+                  <Text style={styles.textMinus}>- 10</Text>
+              </Pressable>
           </View>
-          {viewAction && (
-              <>
-                  <View style={styles.action}>
-                      <Pressable onPress={props.handle10Points} style={styles.plus}>
-                          <Text style={styles.textPlus}>+ 10</Text>
-                      </Pressable>
-                      <Pressable onPress={props.handle10PointsMinus} style={styles.minus}>
-                          <Text style={styles.textMinus}>- 10</Text>
-                      </Pressable>
-                  </View>
-                  <View style={styles.action}>
-                      <Pressable onPress={props.handle100Points} style={styles.plus}>
-                      <Text style={styles.textPlus}>+ 100</Text>
-                      </Pressable>
-                      <Pressable onPress={props.handle100PointsMinus} style={styles.minus}>
-                      <Text style={styles.textMinus}>- 100</Text>
-                      </Pressable>
-                  </View>
-                  <View style={styles.action}>
-                  <Pressable onPress={props.handle500Points} style={styles.plus}>
-                      <Text style={styles.textPlus}>+ 500</Text>
-                  </Pressable>
-                  <Pressable onPress={props.handle500PointsMinus} style={styles.minus}>
-                      <Text style={styles.textMinus}>- 500</Text>
-                  </Pressable>
-                  </View> 
-              </>
-          )}
-          <History points={arrPoints}/>
+          <View style={styles.action}>
+              <Pressable onPress={props.handle50Points} style={styles.plus}>
+              <Text style={styles.textPlus}>+ 50</Text>
+              </Pressable>
+              <Pressable onPress={props.handle50PointsMinus} style={styles.minus}>
+              <Text style={styles.textMinus}>- 50</Text>
+              </Pressable>
+          </View>
+          <View style={styles.action}>
+              <Pressable onPress={props.handle100Points} style={styles.plus}>
+              <Text style={styles.textPlus}>+ 100</Text>
+              </Pressable>
+              <Pressable onPress={props.handle100PointsMinus} style={styles.minus}>
+              <Text style={styles.textMinus}>- 100</Text>
+              </Pressable>
+          </View>
+          <View style={styles.action}>
+          <Pressable onPress={props.handle500Points} style={styles.plus}>
+              <Text style={styles.textPlus}>+ 500</Text>
+          </Pressable>
+          <Pressable onPress={props.handle500PointsMinus} style={styles.minus}>
+              <Text style={styles.textMinus}>- 500</Text>
+          </Pressable>
+          </View> 
+          {/* <History points={arrPoints}/> */}
         </View>
     )
 }
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
         color: '#fff'
       },
       textPoints: {
-        fontSize: 65,
+        fontSize: 45,
         marginTop: 14,
         marginBottom: 14,
         color: '#fff'

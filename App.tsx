@@ -9,58 +9,32 @@ import History from "./src/components/history";
 export default function App() {
   const [ pointsWe, setPointsWe ] = useState(0);
   const [ pointsThen, setPointsThen ] = useState(0);
+  const [ pointsThird, setPointsThird ] = useState(0);
 
-  function handle10Points(how?: string) { 
+  function handlePoints(how: string, points: number) { 
     if(how === 'nos'){
-      setPointsWe(pointsWe + 10);
+      setPointsWe(pointsWe + points);
+    } else if (how === 'then') {
+      setPointsThen(pointsThen + points)
     } else {
-      setPointsThen(pointsThen + 10)
+      setPointsThird(pointsThird + points)
     }
   }
 
-  function handle100Points(how?: string) {
+  function handlePointsMinus(how: string, points: number) { 
     if(how === 'nos'){
-      setPointsWe(pointsWe + 100);
-    }else{
-      setPointsThen(pointsThen + 100)
+      setPointsWe(pointsWe - points);
+    } else if (how === 'then') {
+      setPointsThen(pointsThen - points)
+    } else {
+      setPointsThird(pointsThird - points)
     }
   }
-
-  function handle500Points(how: string) {
-    if(how === 'nos'){
-      setPointsWe(pointsWe + 500);
-    }else{
-      setPointsThen(pointsThen + 500)
-    }
-  }
-
-  function handle10PointsMinus(how: string) {
-    if(how === 'nos'){
-      setPointsWe(pointsWe - 10);
-    }else{
-      setPointsThen(pointsThen - 10)
-    }
-  }
-
-  function handle100PointsMinus(how: string) {
-    if(how === 'nos'){
-      setPointsWe(pointsWe - 100);
-    }else{
-      setPointsThen(pointsThen - 100)
-    }
-  }
-
-  function handle500PointsMinus(how: string) {
-    if(how === 'nos'){
-      setPointsWe(pointsWe - 500);
-    }else{
-      setPointsThen(pointsThen - 500)
-    }
-  }
-
+  
   function handleResetPoints(){
     setPointsWe(0)
     setPointsThen(0)
+    setPointsThird(0)
   }
 
   return (
@@ -71,12 +45,14 @@ export default function App() {
           <Player 
             name="Nós"
             points={pointsWe}
-            handle10Points={() => handle10Points('nos')}
-            handle10PointsMinus={() => handle10PointsMinus('nos')}
-            handle100Points={() => handle100Points('nos')}
-            handle100PointsMinus={() => handle100PointsMinus('nos')}
-            handle500Points={() => handle500Points('nos')}
-            handle500PointsMinus={() => handle500PointsMinus('nos')}
+            handle10Points={() => handlePoints('nos', 10)}
+            handle10PointsMinus={() => handlePointsMinus('nos', 10)}
+            handle50Points={() => handlePoints('nos', 50)}
+            handle50PointsMinus={() => handlePointsMinus('nos', 50)}
+            handle100Points={() => handlePoints('nos', 100)}
+            handle100PointsMinus={() => handlePointsMinus('nos', 100)}
+            handle500Points={() => handlePoints('nos', 500)}
+            handle500PointsMinus={() => handlePointsMinus('nos', 500)}
           />
         {/* </View> */}
         
@@ -86,12 +62,18 @@ export default function App() {
       <Player 
           name="Eles"
           points={pointsThen}
-          handle10Points={() => handle10Points('')}
-          handle10PointsMinus={() => handle10PointsMinus('')}
-          handle100Points={() => handle100Points('')}
-          handle100PointsMinus={() => handle100PointsMinus('')}
-          handle500Points={() => handle500Points('')}
-          handle500PointsMinus={() => handle500Points('')}
+          handle10Points={() => handlePoints('then', 10)}
+          handle10PointsMinus={() => handlePointsMinus('then', 10)}
+          handle50Points={() => handlePoints('then', 50)}
+          handle50PointsMinus={() => handlePointsMinus('then', 50)}
+          handle100Points={() => handlePoints('then', 100)}
+          handle100PointsMinus={() => handlePointsMinus('then', 100)}
+          handle500Points={() => handlePoints('then', 500)}
+          handle500PointsMinus={() => handlePointsMinus('then', 500)}
+        />
+
+      <View
+          style={styles.verticleLine}
         />
       </View>
       <View>
@@ -123,11 +105,11 @@ const styles = StyleSheet.create({
   },
   zero: {
     backgroundColor: "#fff",
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingTop: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 5,
     borderRadius: 4
   },
